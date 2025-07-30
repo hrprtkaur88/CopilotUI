@@ -169,6 +169,10 @@
             width: 20px;
             height: 20px;
             fill: currentColor;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: pixelated;
+            shape-rendering: crispEdges;
         }
 
         .swap-btn {
@@ -212,6 +216,78 @@
         .date-input {
             color: #374151;
             font-weight: 500;
+        }
+
+        /* Shipping form styles */
+        .shipping-modes {
+            margin-top: 16px;
+        }
+
+        .mode-selection {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .mode-option {
+            position: relative;
+        }
+
+        .mode-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .mode-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+            font-size: 16px;
+            font-weight: 500;
+            color: #374151;
+            min-width: 140px;
+        }
+
+        .mode-label:hover {
+            border-color: #3b82f6;
+            background: #f8fafc;
+        }
+
+        .mode-option input[type="radio"]:checked + .mode-label {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .mode-label .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            color: currentColor;
+        }
+
+        .mode-label .icon svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: pixelated;
+            shape-rendering: crispEdges;
+        }
+
+        .mode-text {
+            font-weight: 600;
         }
 
         @media (max-width: 768px) {
@@ -264,6 +340,16 @@
                 border-top: none;
                 border-bottom: none;
             }
+
+            .mode-selection {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .mode-label {
+                min-width: auto;
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -309,7 +395,7 @@
             <div class="search-form">
                 <div class="input-group">
                     <div class="input-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
                             <path d="M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2S10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z" fill="currentColor"/>
                         </svg>
                     </div>
@@ -337,6 +423,41 @@
 
                 <div class="input-group search-btn">
                     <button class="search-button" onclick="searchFlights()">Search</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shipping Form Section -->
+        <div class="search-container" style="margin-top: 40px;">
+            <div class="header" style="text-align: left; color: #374151; margin-bottom: 24px;">
+                <h2 style="font-size: 2rem; font-weight: 600; margin-bottom: 8px;">Shipping Options</h2>
+                <p style="font-size: 1rem; opacity: 0.8;">Select your preferred shipping mode</p>
+            </div>
+
+            <div class="shipping-modes">
+                <div class="mode-selection">
+                    <div class="mode-option">
+                        <input type="radio" id="air-route" name="shipping-mode" value="air-route" checked>
+                        <label for="air-route" class="mode-label">
+                            <span class="icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+                                    <path d="M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2S10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z" fill="currentColor"/>
+                                </svg>
+                            </span>
+                            <span class="mode-text">Air Route</span>
+                        </label>
+                    </div>
+                    <div class="mode-option">
+                        <input type="radio" id="air" name="shipping-mode" value="air">
+                        <label for="air" class="mode-label">
+                            <span class="icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+                                    <path d="M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2S10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z" fill="currentColor"/>
+                                </svg>
+                            </span>
+                            <span class="mode-text">Air</span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -381,6 +502,13 @@
             radio.addEventListener('change', function() {
                 // You could add logic here to show/hide return date fields
                 console.log('Trip type changed to:', this.value);
+            });
+        });
+
+        // Add interactivity for the shipping mode selection
+        document.querySelectorAll('input[name="shipping-mode"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                console.log('Shipping mode changed to:', this.value);
             });
         });
     </script>

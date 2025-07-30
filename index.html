@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking - Discover your next flight</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border: 3px solid #fbbf24;
+        }
+
+        .trip-options {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 24px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-item input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #3b82f6;
+        }
+
+        .radio-item label {
+            font-size: 16px;
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        .class-select {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .class-select select {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .direct-flights {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .direct-flights input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #3b82f6;
+        }
+
+        .direct-flights label {
+            font-size: 16px;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 0;
+            margin-bottom: 0;
+        }
+
+        .input-group {
+            flex: 1;
+            position: relative;
+            border: 2px solid #fbbf24;
+        }
+
+        .input-group:not(:last-child) {
+            border-right: none;
+        }
+
+        .input-group:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .input-group.search-btn {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border: none;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 20px 16px 20px 48px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: white;
+        }
+
+        .input-field::placeholder {
+            color: #9ca3af;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-size: 20px;
+        }
+
+        .input-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .swap-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            background: #f3f4f6;
+            border: 2px solid #fbbf24;
+            border-left: none;
+            border-right: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .swap-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .swap-icon {
+            font-size: 18px;
+            color: #6b7280;
+        }
+
+        .search-button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            min-width: 120px;
+        }
+
+        .search-button:hover {
+            background: #1d4ed8;
+        }
+
+        .date-input {
+            color: #374151;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.2rem;
+            }
+
+            .search-container {
+                padding: 24px;
+            }
+
+            .trip-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+
+            .input-group {
+                border-right: 2px solid #fbbf24 !important;
+                border-bottom: none;
+            }
+
+            .input-group:not(:last-child) {
+                border-bottom: none;
+            }
+
+            .input-group:last-child {
+                border-bottom: 2px solid #fbbf24;
+            }
+
+            .input-group:first-child {
+                border-radius: 8px 8px 0 0;
+            }
+
+            .input-group.search-btn {
+                border-radius: 0 0 8px 8px;
+            }
+
+            .swap-btn {
+                width: 100%;
+                border: 2px solid #fbbf24;
+                border-top: none;
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Discover your next flight</h1>
+            <p>Discover your next dream destination</p>
+        </div>
+
+        <div class="search-container">
+            <div class="trip-options">
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="round-trip" name="trip-type" value="round-trip" checked>
+                        <label for="round-trip">Round-trip</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="one-way" name="trip-type" value="one-way">
+                        <label for="one-way">One-way</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="multi-city" name="trip-type" value="multi-city">
+                        <label for="multi-city">Multi-city</label>
+                    </div>
+                </div>
+
+                <div class="class-select">
+                    <select id="class-type">
+                        <option value="economy">Economy</option>
+                        <option value="premium-economy">Premium Economy</option>
+                        <option value="business">Business</option>
+                        <option value="first">First Class</option>
+                    </select>
+                </div>
+
+                <div class="direct-flights">
+                    <input type="checkbox" id="direct-only">
+                    <label for="direct-only">Direct flights only</label>
+                </div>
+            </div>
+
+            <div class="search-form">
+                <div class="input-group">
+                    <div class="input-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2S10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <input type="text" class="input-field" placeholder="Leaving from" id="departure">
+                </div>
+
+                <div class="swap-btn" onclick="swapLocations()">
+                    <span class="swap-icon">⇄</span>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon">📍</div>
+                    <input type="text" class="input-field" placeholder="Going to" id="destination">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon">📅</div>
+                    <input type="text" class="input-field date-input" placeholder="Travel dates" value="Sat, Aug 30 – Sat, Sep 6" readonly>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon">👤</div>
+                    <input type="text" class="input-field" placeholder="Travelers" value="1 adult" readonly>
+                </div>
+
+                <div class="input-group search-btn">
+                    <button class="search-button" onclick="searchFlights()">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function swapLocations() {
+            const departure = document.getElementById('departure');
+            const destination = document.getElementById('destination');
+            
+            const temp = departure.value;
+            departure.value = destination.value;
+            destination.value = temp;
+        }
+
+        function searchFlights() {
+            const departure = document.getElementById('departure').value;
+            const destination = document.getElementById('destination').value;
+            const tripType = document.querySelector('input[name="trip-type"]:checked').value;
+            const classType = document.getElementById('class-type').value;
+            const directOnly = document.getElementById('direct-only').checked;
+
+            if (!departure || !destination) {
+                alert('Please enter both departure and destination locations.');
+                return;
+            }
+
+            // Here you would typically make an API call to search for flights
+            console.log('Searching flights:', {
+                departure,
+                destination,
+                tripType,
+                classType,
+                directOnly
+            });
+
+            alert(`Searching for ${tripType} flights from ${departure} to ${destination} in ${classType} class.`);
+        }
+
+        // Add some interactivity for the trip type selection
+        document.querySelectorAll('input[name="trip-type"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // You could add logic here to show/hide return date fields
+                console.log('Trip type changed to:', this.value);
+            });
+        });
+    </script>
+</body>
+</html>

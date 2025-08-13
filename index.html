@@ -214,6 +214,85 @@
             font-weight: 500;
         }
 
+        .footer {
+            background: rgba(30, 58, 138, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            margin-top: 60px;
+            padding: 40px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #fbbf24;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: #fbbf24;
+            transition: color 0.2s;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+
+        .footer-social a:hover {
+            background: #fbbf24;
+            color: #1e3a8a;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.5rem;
@@ -263,6 +342,15 @@
                 border: 2px solid #fbbf24;
                 border-top: none;
                 border-bottom: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-social {
+                justify-content: center;
             }
         }
     </style>
@@ -341,6 +429,54 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About FlightBooker</h3>
+                <p>Your trusted partner for discovering and booking flights to destinations around the world. We make travel planning simple and affordable.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Flight Search</a></li>
+                    <li><a href="booking-site.html">My Bookings</a></li>
+                    <li><a href="travel-search.html">Travel Deals</a></li>
+                    <li><a href="shipping-form.html">Cargo Services</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#help">Help Center</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📧 support@flightbooker.com</p>
+                <p>📞 1-800-FLY-BOOK</p>
+                <p>🏢 123 Aviation Blvd, Sky City, SC 12345</p>
+                
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 FlightBooker. All rights reserved. | Designed with ✈️ for travelers worldwide</p>
+        </div>
+    </footer>
 
     <script>
         function swapLocations() {

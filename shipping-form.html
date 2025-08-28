@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Form - Fast & Reliable Delivery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border: 3px solid #fbbf24;
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            flex: 1;
+            position: relative;
+        }
+
+        .form-group.half {
+            flex: 0.5;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px 16px 16px 48px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+            background: white;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .input-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .input-field::placeholder {
+            color: #9ca3af;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-size: 18px;
+            z-index: 1;
+        }
+
+        .input-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .select-field {
+            width: 100%;
+            padding: 16px 16px 16px 48px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .select-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .textarea-field {
+            width: 100%;
+            padding: 16px 16px 16px 48px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+            background: white;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .textarea-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #3b82f6;
+        }
+
+        .checkbox-group label {
+            font-size: 16px;
+            color: #374151;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 24px;
+            margin-top: 12px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #3b82f6;
+        }
+
+        .radio-item label {
+            font-size: 16px;
+            color: #374151;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        .submit-section {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .submit-button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            min-width: 200px;
+        }
+
+        .submit-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.2rem;
+            }
+
+            .form-container {
+                padding: 24px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .form-group.half {
+                flex: 1;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .submit-button {
+                width: 100%;
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 16px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Ship with Confidence</h1>
+            <p>Fast, reliable, and secure shipping worldwide</p>
+            <div style="margin-top: 20px;">
+                <a href="index.html" style="color: white; text-decoration: none; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 6px; font-size: 14px; border: 1px solid rgba(255,255,255,0.3);">✈️ Book flights instead</a>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <form id="shipping-form">
+                <!-- Sender Information -->
+                <div class="section">
+                    <h2 class="section-title">Sender Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sender-name">Full Name</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">👤</div>
+                                <input type="text" id="sender-name" class="input-field" placeholder="Enter your full name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sender-phone">Phone Number</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📞</div>
+                                <input type="tel" id="sender-phone" class="input-field" placeholder="Enter your phone number" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sender-email">Email Address</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📧</div>
+                                <input type="email" id="sender-email" class="input-field" placeholder="Enter your email address" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sender-company">Company (Optional)</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">🏢</div>
+                                <input type="text" id="sender-company" class="input-field" placeholder="Enter company name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sender-address">Street Address</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📍</div>
+                                <input type="text" id="sender-address" class="input-field" placeholder="Enter street address" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sender-city">City</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">🏙️</div>
+                                <input type="text" id="sender-city" class="input-field" placeholder="Enter city" required>
+                            </div>
+                        </div>
+                        <div class="form-group half">
+                            <label for="sender-state">State/Province</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">🗺️</div>
+                                <input type="text" id="sender-state" class="input-field" placeholder="Enter state" required>
+                            </div>
+                        </div>
+                        <div class="form-group half">
+                            <label for="sender-zip">ZIP/Postal Code</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📮</div>
+                                <input type="text" id="sender-zip" class="input-field" placeholder="Enter ZIP code" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recipient Information -->
+                <div class="section">
+                    <h2 class="section-title">Recipient Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recipient-name">Full Name</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">👤</div>
+                                <input type="text" id="recipient-name" class="input-field" placeholder="Enter recipient's full name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-phone">Phone Number</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📞</div>
+                                <input type="tel" id="recipient-phone" class="input-field" placeholder="Enter recipient's phone number" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recipient-email">Email Address</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📧</div>
+                                <input type="email" id="recipient-email" class="input-field" placeholder="Enter recipient's email address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-company">Company (Optional)</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">🏢</div>
+                                <input type="text" id="recipient-company" class="input-field" placeholder="Enter company name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recipient-address">Street Address</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📍</div>
+                                <input type="text" id="recipient-address" class="input-field" placeholder="Enter street address" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recipient-city">City</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">🏙️</div>
+                                <input type="text" id="recipient-city" class="input-field" placeholder="Enter city" required>
+                            </div>
+                        </div>
+                        <div class="form-group half">
+                            <label for="recipient-state">State/Province</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">🗺️</div>
+                                <input type="text" id="recipient-state" class="input-field" placeholder="Enter state" required>
+                            </div>
+                        </div>
+                        <div class="form-group half">
+                            <label for="recipient-zip">ZIP/Postal Code</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📮</div>
+                                <input type="text" id="recipient-zip" class="input-field" placeholder="Enter ZIP code" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package Details -->
+                <div class="section">
+                    <h2 class="section-title">Package Details</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="package-type">Package Type</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📦</div>
+                                <select id="package-type" class="select-field" required>
+                                    <option value="">Select package type</option>
+                                    <option value="document">Document</option>
+                                    <option value="small-package">Small Package</option>
+                                    <option value="medium-package">Medium Package</option>
+                                    <option value="large-package">Large Package</option>
+                                    <option value="fragile">Fragile Item</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="package-weight">Weight (lbs)</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">⚖️</div>
+                                <input type="number" id="package-weight" class="input-field" placeholder="Enter weight" min="0" step="0.1" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="package-length">Length (inches)</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📏</div>
+                                <input type="number" id="package-length" class="input-field" placeholder="Length" min="0" step="0.1" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="package-width">Width (inches)</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📐</div>
+                                <input type="number" id="package-width" class="input-field" placeholder="Width" min="0" step="0.1" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="package-height">Height (inches)</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📏</div>
+                                <input type="number" id="package-height" class="input-field" placeholder="Height" min="0" step="0.1" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="package-value">Package Value ($)</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">💰</div>
+                                <input type="number" id="package-value" class="input-field" placeholder="Enter package value" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="package-description">Description</label>
+                            <div class="input-wrapper">
+                                <div class="input-icon">📝</div>
+                                <textarea id="package-description" class="textarea-field" placeholder="Describe the contents of your package"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Options -->
+                <div class="section">
+                    <h2 class="section-title">Shipping Options</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Delivery Speed</label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="standard" name="delivery-speed" value="standard" checked>
+                                    <label for="standard">Standard (5-7 days)</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="express" name="delivery-speed" value="express">
+                                    <label for="express">Express (2-3 days)</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="overnight" name="delivery-speed" value="overnight">
+                                    <label for="overnight">Overnight</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="signature-required">
+                                <label for="signature-required">Signature Required</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="insurance">
+                                <label for="insurance">Add Insurance</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="tracking">
+                                <label for="tracking">SMS Tracking Updates</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="email-notifications">
+                                <label for="email-notifications">Email Notifications</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="submit" class="submit-button">Calculate Shipping & Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('shipping-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const shipmentData = {};
+            
+            // Convert FormData to object
+            for (let [key, value] of formData.entries()) {
+                shipmentData[key] = value;
+            }
+            
+            // Add checkbox values
+            shipmentData['signature-required'] = document.getElementById('signature-required').checked;
+            shipmentData['insurance'] = document.getElementById('insurance').checked;
+            shipmentData['tracking'] = document.getElementById('tracking').checked;
+            shipmentData['email-notifications'] = document.getElementById('email-notifications').checked;
+            
+            // Validate required fields
+            const requiredFields = [
+                'sender-name', 'sender-phone', 'sender-email', 'sender-address', 'sender-city', 'sender-state', 'sender-zip',
+                'recipient-name', 'recipient-phone', 'recipient-address', 'recipient-city', 'recipient-state', 'recipient-zip',
+                'package-type', 'package-weight', 'package-length', 'package-width', 'package-height'
+            ];
+            
+            let isValid = true;
+            for (let field of requiredFields) {
+                const element = document.getElementById(field);
+                if (!element.value.trim()) {
+                    element.style.borderColor = '#ef4444';
+                    isValid = false;
+                } else {
+                    element.style.borderColor = '#e5e7eb';
+                }
+            }
+            
+            if (!isValid) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Calculate estimated shipping cost (mock calculation)
+            const weight = parseFloat(document.getElementById('package-weight').value);
+            const deliverySpeed = document.querySelector('input[name="delivery-speed"]:checked').value;
+            
+            let baseCost = weight * 2.5;
+            if (deliverySpeed === 'express') baseCost *= 1.5;
+            if (deliverySpeed === 'overnight') baseCost *= 2.5;
+            
+            if (document.getElementById('insurance').checked) baseCost += 5;
+            if (document.getElementById('signature-required').checked) baseCost += 3;
+            
+            const estimatedCost = baseCost.toFixed(2);
+            
+            // Display results
+            console.log('Shipment Data:', shipmentData);
+            alert(`Shipping calculated successfully!\n\nEstimated Cost: $${estimatedCost}\nDelivery Speed: ${deliverySpeed}\n\nClick OK to proceed to payment.`);
+        });
+        
+        // Add real-time validation
+        document.querySelectorAll('.input-field, .select-field, .textarea-field').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#ef4444';
+                } else {
+                    this.style.borderColor = '#e5e7eb';
+                }
+            });
+        });
+        
+        // Email validation
+        document.querySelectorAll('input[type="email"]').forEach(field => {
+            field.addEventListener('blur', function() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (this.value && !emailRegex.test(this.value)) {
+                    this.style.borderColor = '#ef4444';
+                } else if (this.value || !this.hasAttribute('required')) {
+                    this.style.borderColor = '#e5e7eb';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

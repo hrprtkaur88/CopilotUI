@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking.com Clone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #003580, #0071c2);
+            color: white;
+            padding: 16px 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .top-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .currency, .help, .property-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .register-btn, .signin-btn {
+            padding: 8px 16px;
+            border: 1px solid white;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .register-btn {
+            background: white;
+            color: #003580;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .nav-tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: #003580;
+            border-color: white;
+        }
+
+        /* Search Form */
+        .search-container {
+            background: #febb02;
+            padding: 4px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .search-form {
+            display: flex;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-right: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+
+        .search-input:last-of-type {
+            border-right: none;
+        }
+
+        .search-input::placeholder {
+            color: #666;
+        }
+
+        .search-btn {
+            padding: 16px 32px;
+            background: #0071c2;
+            color: white;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .search-btn:hover {
+            background: #005bb5;
+        }
+
+        .flight-checkbox {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Offers Section */
+        .offers-section {
+            margin-bottom: 60px;
+        }
+
+        .offers-header {
+            margin-bottom: 24px;
+        }
+
+        .offers-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #262626;
+            margin-bottom: 8px;
+        }
+
+        .offers-subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            padding: 24px;
+            gap: 24px;
+        }
+
+        .offer-content {
+            flex: 1;
+        }
+
+        .offer-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #262626;
+            margin-bottom: 8px;
+        }
+
+        .offer-subtitle {
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .offer-btn {
+            background: #0071c2;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .offer-image {
+            width: 150px;
+            height: 100px;
+            background: linear-gradient(45deg, #0071c2, #003580);
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .vacation-card {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><rect fill="%23d4a574" width="400" height="200"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 32px;
+            border-radius: 8px;
+            grid-column: span 2;
+        }
+
+        .vacation-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .vacation-subtitle {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        /* Properties Section */
+        .properties-section {
+            margin-bottom: 60px;
+        }
+
+        .properties-header {
+            margin-bottom: 32px;
+        }
+
+        .properties-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #262626;
+            margin-bottom: 8px;
+        }
+
+        .properties-subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .property-image {
+            height: 200px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            position: relative;
+        }
+
+        .property-image.mountain {
+            background: linear-gradient(45deg, #87ceeb, #4682b4);
+        }
+
+        .property-image.resort {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        }
+
+        .property-image.colorful {
+            background: linear-gradient(45deg, #feca57, #ff9ff3);
+        }
+
+        .property-image.tropical {
+            background: linear-gradient(45deg, #ff9ff3, #54a0ff);
+        }
+
+        .heart-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .property-content {
+            padding: 16px;
+        }
+
+        .property-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #262626;
+            margin-bottom: 4px;
+        }
+
+        .property-location {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #262626;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .search-form {
+                flex-direction: column;
+            }
+
+            .search-input {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vacation-card {
+                grid-column: span 1;
+            }
+
+            .offer-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+
+            .top-nav {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <!-- Top Navigation -->
+            <nav class="top-nav">
+                <div class="logo">Booking.com</div>
+                <div class="top-nav-right">
+                    <a href="#" class="currency">USD 🇺🇸</a>
+                    <a href="#" class="help">?</a>
+                    <a href="#" class="property-link">List your property</a>
+                    <div class="auth-buttons">
+                        <a href="#" class="register-btn">Register</a>
+                        <a href="#" class="signin-btn">Sign in</a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Navigation Tabs -->
+            <nav class="nav-tabs">
+                <a href="#" class="nav-tab active">🏨 Stays</a>
+                <a href="#" class="nav-tab">✈️ Flights</a>
+                <a href="#" class="nav-tab">✈️🏨 Flight + Hotel</a>
+                <a href="#" class="nav-tab">🚗 Car rental</a>
+                <a href="#" class="nav-tab">🚢 Cruises</a>
+                <a href="#" class="nav-tab">🎯 Attractions</a>
+                <a href="#" class="nav-tab">🚖 Airport taxis</a>
+            </nav>
+
+            <!-- Search Form -->
+            <div class="search-container">
+                <div class="search-form">
+                    <input type="text" class="search-input" placeholder="Where are you going?">
+                    <input type="text" class="search-input" placeholder="Check-in date — Check-out date">
+                    <input type="text" class="search-input" placeholder="2 adults · 0 children · 1 room">
+                    <button class="search-btn">Search</button>
+                </div>
+                <div class="flight-checkbox">
+                    <input type="checkbox" id="flights">
+                    <label for="flights">I'm looking for flights</label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Offers Section -->
+        <section class="offers-section">
+            <div class="offers-header">
+                <h2 class="offers-title">Offers</h2>
+                <p class="offers-subtitle">Promotions, deals, and special offers for you</p>
+            </div>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <div class="offer-content">
+                        <h3 class="offer-title">Quick escape, quality time</h3>
+                        <p class="offer-subtitle">Save up to 20% with a Getaway Deal</p>
+                        <button class="offer-btn">Save on stays</button>
+                    </div>
+                    <div class="offer-image"></div>
+                </div>
+                <div class="vacation-card">
+                    <div class="vacation-content">
+                        <span class="vacation-label">Vacation rentals</span>
+                        <h3 class="vacation-title">Live the dream in a vacation home</h3>
+                        <p class="vacation-subtitle">Choose from houses, villas, cabins, and more</p>
+                        <button class="offer-btn">Book yours</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Properties Section -->
+        <section class="properties-section">
+            <div class="properties-header">
+                <h2 class="properties-title">Stay at our top unique properties</h2>
+                <p class="properties-subtitle">From castles and villas to boats and igloos, we have it all</p>
+            </div>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <div class="property-image mountain">
+                        <div class="heart-icon">♡</div>
+                    </div>
+                    <div class="property-content">
+                        <h3 class="property-name">Mountain Lodge</h3>
+                        <p class="property-location">Alpine Region</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="property-image resort">
+                        <div class="heart-icon">♡</div>
+                    </div>
+                    <div class="property-content">
+                        <h3 class="property-name">Desert Resort</h3>
+                        <p class="property-location">Southwestern Desert</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="property-image colorful">
+                        <div class="heart-icon">♡</div>
+                    </div>
+                    <div class="property-content">
+                        <h3 class="property-name">Colorful Villa</h3>
+                        <p class="property-location">Mediterranean Coast</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="property-image tropical">
+                        <div class="heart-icon">♡</div>
+                    </div>
+                    <div class="property-content">
+                        <h3 class="property-name">Tropical Paradise</h3>
+                        <p class="property-location">Caribbean Island</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Microsoft Corporation. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Add interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Heart icon toggle
+            document.querySelectorAll('.heart-icon').forEach(heart => {
+                heart.addEventListener('click', function() {
+                    this.style.color = this.style.color === 'red' ? '' : 'red';
+                    this.textContent = this.textContent === '♡' ? '♥' : '♡';
+                });
+            });
+
+            // Search button functionality
+            document.querySelector('.search-btn').addEventListener('click', function() {
+                alert('Search functionality would be implemented here');
+            });
+
+            // Offer buttons
+            document.querySelectorAll('.offer-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    alert('Offer details would be shown here');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

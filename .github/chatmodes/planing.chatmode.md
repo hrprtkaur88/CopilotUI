@@ -1,6 +1,6 @@
----
-description: 'Description of the custom chat mode.'
+description: 'Check that HTML footers contain the Microsoft text; if missing, insert it.'
 tools: []
+---
 
 ## Purpose
 Scan `.html` files and ensure the `<footer>` contains the text "Microsoft". If missing, insert it.
